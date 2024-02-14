@@ -25,6 +25,15 @@ struct Onboarding: View {
                             RadialGradient(colors:[ .red, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
                         )
                 }
+                .frame(height: .infinity)
+                
+                VStack(spacing: 15, content: {
+                    Spacer()
+                    
+                    Image("shoes-onboarding")
+                        .resizable()
+                        .scaledToFit()
+                })
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
