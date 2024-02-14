@@ -33,6 +33,16 @@ struct Onboarding: View {
                     Image("shoes-onboarding")
                         .resizable()
                         .scaledToFit()
+                    
+                    Text("Start Journey\nwith NIKE")
+                        .font(.largeTitle.bold())
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Smart gorgeous and fashionable collection makes you cool")
+                        .multilineTextAlignment(.center)
+                        .opacity(0.6)
+                    
+                    Spacer()
                 })
             }
             .padding()
