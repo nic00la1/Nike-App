@@ -24,6 +24,7 @@ struct Onboarding: View {
                         .fill(
                             RadialGradient(colors:[ .red, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
                         )
+                        .padding(.bottom, -(UIScreen.main.bounds.width / 2))
                 }
                 .frame(height: .infinity)
                 
@@ -43,6 +44,13 @@ struct Onboarding: View {
                         .opacity(0.6)
                     
                     Spacer()
+                    
+                    VStack {
+                        Image(systemName: "chevron.up")
+                        Text("Get started")
+                            .padding(.top)
+                    }
+                    .fontWeight(.medium)
                 })
             }
             .padding()
