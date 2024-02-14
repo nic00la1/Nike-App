@@ -10,6 +10,10 @@ import SwiftUI
 struct Onboarding: View {
     
     @State private var isActive = false
+    // Now we add some animation properties
+    
+    @State private var isExpanded = false
+    @State private var offset = CGSize.zero
     
     var body: some View {
         if isActive {
@@ -25,8 +29,10 @@ struct Onboarding: View {
                             RadialGradient(colors:[ .red, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
                         )
                         .padding(.bottom, -(UIScreen.main.bounds.width / 2))
+                        .scaleEffect(isExpanded ? 20 : 2)
                 }
                 .frame(height: .infinity)
+                .zIndex(isExpanded ? 2 : 0)
                 
                 VStack(spacing: 15, content: {
                     Spacer()
@@ -53,6 +59,19 @@ struct Onboarding: View {
                     .fontWeight(.medium)
                 })
             }
+            .opacity(isExpanded ? 0 : 1)
+            .offset(offset)
+            // When user swipe up, all layout goes up so for that we add swipe up gesture
+            .gesture(DragGesture()
+                .onEnded({ value in
+                    if value.translation.height < 50 {
+                        withAnimation(.easeInOut(duration: 2)) {
+                            offset = value.translation
+                            isExpanded = true
+                        }
+                        
+                    }
+                }))
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
