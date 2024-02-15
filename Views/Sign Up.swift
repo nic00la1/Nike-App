@@ -1,5 +1,5 @@
 //
-//  Sign in.swift
+//  Sign Up.swift
 //  Nike-App
 //
 //  Created by Nicola Kaleta on 15/02/2024.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Sign_in: View {
+struct Sign_Up: View {
+    @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -18,7 +19,7 @@ struct Sign_in: View {
                     .imageScale(.large)
                 
                 VStack(alignment: .leading, spacing: 15, content: {
-                    Text("Sign-in")
+                    Text("Sign-up")
                         .font(.title)
                     
                     Text("Enter your email address and password and continue shopping.")
@@ -28,6 +29,16 @@ struct Sign_in: View {
                 
                 
                 VStack(spacing: 15, content: {
+                    TextField("User name", text: $username)
+                        .padding(.horizontal)
+                        .frame(height: 60)
+                        .background(.gray.opacity(0.2))
+                        .clipShape(Capsule())
+                        .overlay {
+                            Capsule()
+                                .stroke(.gray.opacity(0.8), lineWidth: 0.5)
+                        }
+                    
                     TextField("Email Address", text: $email)
                         .padding(.horizontal)
                         .frame(height: 60)
@@ -54,7 +65,7 @@ struct Sign_in: View {
                 // Login button
                 VStack(spacing: 15, content: {
                     Button {
-                        // I'll do it next time 
+                        
                     } label: {
                         Text("Continue")
                             .fontWeight(.semibold)
@@ -66,9 +77,9 @@ struct Sign_in: View {
                     .foregroundStyle(.white)
                     
                     NavigationLink {
-                        Sign_Up()
+                        Sign_in()
                     } label: {
-                        Text("Not having account? **Sign-up**")
+                        Text("Already have an account? **Sign-in**")
                             .frame(maxWidth: .infinity)
                     }
                     .foregroundStyle(.white)
@@ -78,9 +89,10 @@ struct Sign_in: View {
             .padding()
         .preferredColorScheme(.dark)
         }
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    Sign_in()
+    Sign_Up()
 }
