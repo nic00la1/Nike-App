@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseCore
 
 struct Sign_in: View {
     @State private var email: String = ""
     @State private var password: String = ""
+    
+    @State private var isLoading = false
     
     @Environment(\.presentationMode) var dismiss
     
@@ -60,9 +64,21 @@ struct Sign_in: View {
                 VStack(spacing: 15, content: {
                     Button {
                         // I'll do it next time
+                        Auth.auth().signIn(withEmail: email, password: password) {(result, error)
+                            in
+                            
+                            if error != nil {
+                                
+                            }
+                        }
                     } label: {
-                        Text("Continue")
-                            .fontWeight(.semibold)
+                        // When is processing the data we show progress in button so im adding
+                        if isLoading {
+                            ProgressView()
+                        } else {
+                            Text("Continue")
+                                .fontWeight(.semibold)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: 60)
