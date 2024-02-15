@@ -28,8 +28,8 @@ struct Onboarding: View {
                         .fill(
                             RadialGradient(colors:[ .red, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
                         )
-                        .padding(.bottom, -(UIScreen.main.bounds.width / 2))
                         .scaleEffect(isExpanded ? 20 : 2)
+                        .padding(.bottom, -(UIScreen.main.bounds.width / 2))
                 }
                 .frame(height: .infinity)
                 .zIndex(isExpanded ? 2 : 0)
@@ -58,9 +58,9 @@ struct Onboarding: View {
                     }
                     .fontWeight(.medium)
                 })
+                .opacity(isExpanded ? 0 : 1)
+                .offset(offset)
             }
-            .opacity(isExpanded ? 0 : 1)
-            .offset(offset)
             // When user swipe up, all layout goes up so for that we add swipe up gesture
             .gesture(DragGesture()
                 .onEnded({ value in
@@ -69,7 +69,12 @@ struct Onboarding: View {
                             offset = value.translation
                             isExpanded = true
                         }
-                        
+                        // Now when swipe we move to the next scene
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            withAnimation {
+                                isActive.toggle()
+                            }
+                        }
                     }
                 }))
             .padding()
