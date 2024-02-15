@@ -49,6 +49,25 @@ struct Sign_in: View {
             })
             
             Spacer()
+            
+            // Login button
+            VStack(spacing: 15, content: {
+                Button {
+                    
+                } label: {
+                    Text("Continue")
+                        .fontWeight(.semibold)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 60)
+                .background(.red)
+                .clipShape(Capsule())
+                .foregroundStyle(.white)
+                
+                Text("Not having account? **Signup**")
+                    .frame(maxWidth: .infinity)
+            })
+            
         })
         .padding()
         .preferredColorScheme(.dark)
