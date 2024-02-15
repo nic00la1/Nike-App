@@ -18,7 +18,7 @@ struct Onboarding: View {
     var body: some View {
         if isActive {
             // We move to Login Screen after that
-            ContentView()
+            Sign_in ()
         } else {
             // Design of This View
             ZStack(alignment: .top) {

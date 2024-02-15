@@ -12,11 +12,16 @@ struct Sign_Up: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    @Environment(\.presentationMode) var dismiss
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .leading, spacing: 40, content: {
                 Image(systemName: "arrow.left")
                     .imageScale(.large)
+                    .onTapGesture {
+                        dismiss.wrappedValue.dismiss()
+                    }
                 
                 VStack(alignment: .leading, spacing: 15, content: {
                     Text("Sign-up")

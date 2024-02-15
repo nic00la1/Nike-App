@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseAuth
 
 struct Splash: View {
     @State var isActive = false
@@ -13,8 +15,15 @@ struct Splash: View {
     var body: some View {
         VStack {
             if isActive {
-                Onboarding()
-            } else  {
+                // Here if user is nil means user not signed in to app then they will move to Onboarding otherwise they direct connect to ContentView
+                
+                if Auth.auth().currentUser != nil {
+                    ContentView()
+                } else {
+                    Onboarding()
+                }
+                
+            } else {
                 Text("NIKE")
                     .font(.largeTitle.bold())
             }
