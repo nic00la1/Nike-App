@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Sign_in: View {
     @State private var email: String = ""
+    @State private var password: String = ""
     
     var body: some View {
         VStack (alignment: .leading, spacing: 20, content: {
@@ -30,6 +31,17 @@ struct Sign_in: View {
                     Capsule()
                         .stroke(.gray.opacity(0.8), lineWidth: 0.5)
                 }
+            
+            SecureField("Password", text: $password)
+                .padding(.horizontal)
+                .frame(height: 60)
+                .background(.gray.opacity(0.2))
+                .clipShape(Capsule())
+                .overlay {
+                    Capsule()
+                        .stroke(.gray.opacity(0.8), lineWidth: 0.5)
+                }
+            Spacer()
         })
         .padding()
         .preferredColorScheme(.dark)
