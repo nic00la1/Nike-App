@@ -68,7 +68,13 @@ struct Sign_in: View {
                             in
                             
                             if error != nil {
-                                
+                                print(error?.localizedDescription ?? "")
+                                withAnimation {
+                                    isLoading.toggle()
+                                }
+                            } else {
+                                // Collecting user information and moving to the next view in app.
+                                // this i'll do after signup view code.
                             }
                         }
                     } label: {
