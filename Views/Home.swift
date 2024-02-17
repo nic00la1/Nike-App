@@ -33,9 +33,13 @@ struct Home: View {
                     categoriesView
                         .zIndex(1)
                     
+                    // Product List
+                    productsView
+                    
                 })
                 .padding()
             }
+            .scrollIndicators(.hidden)
         }
     }
     
@@ -72,6 +76,34 @@ struct Home: View {
         .scrollIndicators(.hidden)
     }
     
+    
+    // MARK - Products View
+    var productsView: some View {
+        VStack {
+            ForEach(sampleProducts, id: \.id) { item in
+                VStack {
+                    AsyncImage(url: URL(string: item.images[0])) { img in
+                        img.resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 40, height: 200)
+                    .clipShape(Rectangle())
+                    
+                    Text(item.title)
+                        .font(.headline.bold())
+                    
+                    Text("$\(item.price)")
+                        .font(.callout)
+                }
+                .padding(.bottom)
+                .background(.gray.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+            }
+        }
+        .zIndex(0)
+    }
 }
 
 #Preview {
