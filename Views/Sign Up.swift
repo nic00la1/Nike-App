@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 
 struct Sign_Up: View {
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    
+    @State private var isLoading = false
     
     @Environment(\.presentationMode) var dismiss
     
@@ -70,10 +75,41 @@ struct Sign_Up: View {
                 // Login button
                 VStack(spacing: 15, content: {
                     Button {
-                        
+                        // Sign up
+                        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                withAnimation {
+                                    isLoading.toggle()
+                                }
+                            } else {
+                                // Storing user basic details to firebase database
+                                let db = Firestore.firestore()
+                                let data: [String: Any] = [
+                                    "User Name": username,
+                                    "Email": email,
+                                ]
+                                
+                                // Adding the same user name and email to local memory so, it isn't neccessary to sync every time
+                                UserDefaults.standard.setValue(result?.user.uid, forKey: "UID")
+                                // UID is an unique key provided to user when they sign up to firestore database
+                                
+                                UserDefaults.standard.setValue(username, forKey: "NAME")
+                                UserDefaults.standard.setValue(email, forKey: "EMAIL")
+                                
+                                db.collection("USERS").addDocument(data: data)
+                                isLoading.toggle()
+                                
+                            }
+                        }
                     } label: {
-                        Text("Continue")
-                            .fontWeight(.semibold)
+                        if isLoading {
+                            ProgressView()
+                        } else {
+                            Text("Continue")
+                                .fontWeight(.semibold)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: 60)

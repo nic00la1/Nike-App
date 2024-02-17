@@ -75,6 +75,7 @@ struct Sign_in: View {
                             } else {
                                 // Collecting user information and moving to the next view in app.
                                 // this i'll do after signup view code.
+                                
                             }
                         }
                     } label: {
