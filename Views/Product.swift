@@ -51,10 +51,21 @@ struct Product: View {
                             Text("Size")
                                 .font(.title2.bold())
                         
-                            ScrollView {
-                                
+                            ScrollView(.horizontal) {
+                                HStack {
+                                    ForEach(data.sizes, id: \.self) { item in
+                                    Text("\(item)")
+                                            .font(.headline)
+                                            .frame(width: 70, height: 70)
+                                            .background(.gray.opacity(0.06))
+                                            .foregroundStyle(.black)
+                                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                                    }
+                                }
                             }
+                            .scrollIndicators(.hidden)
                         })
+                        .padding()
                     }
                 }
                 
