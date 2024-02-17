@@ -86,8 +86,31 @@ struct Product: View {
                 }
                 
                 // Bottom Bar
+                HStack {
+                    // Price
+                    VStack(alignment: .leading) {
+                        Text("$\(data.price)")
+                            .font(.title2.bold())
+                    }
+                    .frame(width: UIScreen.main.bounds.width / 2.5, height: 60)
+                    .background(.gray.opacity(0.06))
+                    .clipShape(.rect(cornerRadius: 25))
+                    
+                    // Add to Cart
+                    Button("Add to Card") {
+                        
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(.black)
+                    .clipShape(.rect(cornerRadius: 25))
+                    .foregroundStyle(.white)
+                    .fontWeight(.semibold)
+                }
+                .padding(.horizontal)
+                
             }
-            .ignoresSafeArea()
+            .edgesIgnoringSafeArea(.top)
         }
         .scrollIndicators(.hidden)
     }
