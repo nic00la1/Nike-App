@@ -31,6 +31,7 @@ struct Home: View {
                     }
                     // Categories
                     categoriesView
+                        .zIndex(1)
                     
                 })
                 .padding()
@@ -59,6 +60,12 @@ struct Home: View {
                     .padding()
                     .background( currentCategory == item.title ? .black : .gray.opacity(0.08) )
                     .clipShape(Capsule())
+                    .onTapGesture {
+                        withAnimation {
+                            currentCategory = item.title
+                        }
+                       
+                    }
                 }
             })
         }

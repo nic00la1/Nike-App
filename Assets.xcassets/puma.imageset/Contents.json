@@ -20,6 +20,6 @@
   },
   "properties" : {
     "localizable" : true,
-    "template-rendering-intent" : "original"
+    "template-rendering-intent" : "template"
   }
 }
