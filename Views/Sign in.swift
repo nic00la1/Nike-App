@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
 
 struct Sign_in: View {
     @State private var email: String = ""
@@ -74,8 +75,25 @@ struct Sign_in: View {
                                 }
                             } else {
                                 // Collecting user information and moving to the next view in app.
-                                // this i'll do after signup view code.
-                                
+                                let db = Firestore.firestore()
+                                db.collection("USERS").document(result?.user.uid ?? "").getDocument { document, error in
+                                    
+                                    if let document = document, document.exists {
+                                        let name = document.get("User_Name") as? String ?? ""
+                                        let email = document.get("Email") as? String ?? ""
+                                        
+                                        // Storing collected name and email from firestore to local storage
+                                        
+                                        UserDefaults.standard.set(name, forKey: "NAME")
+                                        UserDefaults.standard.set(email, forKey: "EMAIL")
+                                        
+                                        isLoading.toggle()
+                                    }
+                                    else {
+                                        isLoading.toggle()
+                                        print("Document Not Exist")
+                                    }
+                                }
                             }
                         }
                     } label: {
