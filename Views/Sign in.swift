@@ -16,6 +16,10 @@ struct Sign_in: View {
     
     @State private var isLoading = false
     
+    // Adding new var isSigned so when user successfully log in then they will move to main screen
+    @State private var isSigned = false
+    
+    
     @Environment(\.presentationMode) var dismiss
     
     var body: some View {
@@ -64,7 +68,10 @@ struct Sign_in: View {
                 // Login button
                 VStack(spacing: 15, content: {
                     Button {
-                        // I'll do it next time
+                
+                        // isLoading is added here bc progressView is not showing after click
+                        isLoading = true
+                        
                         Auth.auth().signIn(withEmail: email, password: password) {(result, error)
                             in
                             
@@ -75,6 +82,9 @@ struct Sign_in: View {
                                 }
                             } else {
                                 // Collecting user information and moving to the next view in app.
+                                // Here user successfully sign in so we changing isSigned value to true
+                                isSigned = true
+                                
                                 let db = Firestore.firestore()
                                 db.collection("USERS").document(result?.user.uid ?? "").getDocument { document, error in
                                     
@@ -110,6 +120,9 @@ struct Sign_in: View {
                     .background(.red)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
+                    .navigationDestination(isPresented: $isSigned) {
+                        ContentView()
+                    }
                     
                     NavigationLink {
                         Sign_Up()
