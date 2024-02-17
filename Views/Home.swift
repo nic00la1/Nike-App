@@ -8,11 +8,34 @@
 import SwiftUI
 
 struct Home: View {
+    @State var currentCategory = "All"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20, content: {
+                    HStack {
+                        Text("**Shoes**\nCollections")
+                            .font(.largeTitle)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "bell")
+                            .padding(.vertical, 25)
+                            .padding(.horizontal, 16)
+                            .imageScale(.large)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.black.opacity(0.05), lineWidth: 3)
+                            }
+                    }
+                })
+                .padding()
+            }
+        }
     }
 }
 
 #Preview {
-    Home()
+    ContentView()
 }
