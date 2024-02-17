@@ -32,7 +32,7 @@ struct ReviewModel : Identifiable, Hashable {
 let sampleProducts: [ProductsModel] = [
     .init(id: "1", title: "X Lows ASH", brand: "Nike", description: "Elegant. Mellow. Eternal. Reminiscent of smouldering embers and weathered stones. A muted spectrum that exists between light and shadow. A sophisticated reflection that allures and ages gracefully. ASH strikes a subtle balance between grey and blue contrasts and is a statement of unmatched simplicity.", images: ["https://www.wearcomet.com/cdn/shop/files/Lateral-view-min_27e3e886-f774-43c7-87f9-e48a326a4adb.jpg?v=1698137600&width=1346",
         "https://www.wearcomet.com/cdn/shop/files/front3-4-min.jpg?v=1698137600&width=2200",
-        "https://www.wearcomet.com/cdn/shop/files/details-zoom-min.jpg?v=1698137600&width=2200",
+        "https://www.wearcomet.com/cdn/shop/files/Greywhitelow_7788c905-5c41-4217-bb42-259156575bd4.png?v=1698137600",
         "https://www.wearcomet.com/cdn/shop/files/Back-3-4-view-min_18c04255-c011-48a7-b218-d2125c15faab.jpg?v=1698233934&width=2200"],
         sizes: [40, 41, 42, 43, 44], reviews: [sampleReview, sampleReview], price: 250),
     
