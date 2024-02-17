@@ -17,6 +17,9 @@ struct Sign_Up: View {
     
     @State private var isLoading = false
     
+    // Same We do here
+    @State private var isSigned = false
+    
     @Environment(\.presentationMode) var dismiss
     
     var body: some View {
@@ -76,6 +79,8 @@ struct Sign_Up: View {
                 VStack(spacing: 15, content: {
                     Button {
                         // Sign up
+                        isLoading.toggle()
+                        
                         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                             
                             if error != nil {
@@ -101,6 +106,8 @@ struct Sign_Up: View {
                                 db.collection("USERS").addDocument(data: data)
                                 isLoading.toggle()
                                 
+                                isSigned = true
+                                
                             }
                         }
                     } label: {
@@ -116,6 +123,9 @@ struct Sign_Up: View {
                     .background(.red)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
+                    .navigationDestination(isPresented: $isSigned) {
+                        ContentView()
+                    }
                     
                     NavigationLink {
                         Sign_in()
