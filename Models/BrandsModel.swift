@@ -18,6 +18,4 @@ var sampleBrands: [BrandsModel] = [
     .init(title: "Nike", icon: "nike"),
     .init(title: "Adidas", icon: "adidas"),
     .init(title: "Puma", icon: "puma")
-    
-    
 ]

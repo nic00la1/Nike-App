@@ -29,11 +29,42 @@ struct Home: View {
                                     .stroke(.black.opacity(0.05), lineWidth: 3)
                             }
                     }
+                    // Categories
+                    categoriesView
+                    
                 })
                 .padding()
             }
         }
     }
+    
+    // MARK - Categories
+    var categoriesView: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 15, content: {
+                ForEach(sampleBrands, id: \.id) { item in
+                    HStack {
+                        if !item.icon.isEmpty {
+                            Image(item.icon)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 26, height: 26)
+                        }
+                        
+                        if currentCategory == item.title || item.title == "All" {
+                            Text(item.title)
+                        }
+                    }
+                    .foregroundStyle( currentCategory == item.title ? .white : .black)
+                    .padding()
+                    .background( currentCategory == item.title ? .black : .gray.opacity(0.08) )
+                    .clipShape(Capsule())
+                }
+            })
+        }
+        .scrollIndicators(.hidden)
+    }
+    
 }
 
 #Preview {
