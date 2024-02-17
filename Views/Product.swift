@@ -11,6 +11,8 @@ struct Product: View {
     // Its our productView we show single product here
     var data = sampleProducts[0]
     
+    @State var selectedSize = 40
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -57,14 +59,28 @@ struct Product: View {
                                     Text("\(item)")
                                             .font(.headline)
                                             .frame(width: 70, height: 70)
-                                            .background(.gray.opacity(0.06))
-                                            .foregroundStyle(.black)
+                                            .background( selectedSize == item ? .black : .gray.opacity(0.06))
+                                            .foregroundStyle( selectedSize == item ? .white : .black)
                                             .clipShape(RoundedRectangle(cornerRadius: 30))
+                                        
+                                        // changing onTapGesture selectedSize value's.
+                                            .onTapGesture {
+                                                selectedSize = item
+                                            }
                                     }
                                 }
                             }
                             .scrollIndicators(.hidden)
                         })
+                        .padding()
+                        
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text("Details")
+                                .font(.title2.bold())
+                            
+                            Text(data.description)
+                                .multilineTextAlignment(.leading)
+                        }
                         .padding()
                     }
                 }
@@ -73,6 +89,7 @@ struct Product: View {
             }
             .ignoresSafeArea()
         }
+        .scrollIndicators(.hidden)
     }
 }
 
