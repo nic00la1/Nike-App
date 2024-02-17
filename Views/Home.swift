@@ -10,6 +10,8 @@ import SwiftUI
 struct Home: View {
     @State var currentCategory = "All"
     
+    @State var productsList = sampleProducts
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -35,7 +37,6 @@ struct Home: View {
                     
                     // Product List
                     productsView
-                    
                 })
                 .padding()
             }
@@ -67,6 +68,15 @@ struct Home: View {
                     .onTapGesture {
                         withAnimation {
                             currentCategory = item.title
+                            
+                            // Now we want to show shoes of selected brand so we apply filter on the list
+                            // For that we use new list
+                            
+                            if item.title == "All" {
+                                productsList = sampleProducts
+                            } else {
+                                productsList = sampleProducts.filter{ $0.brand == item.title }
+                            }
                         }
                        
                     }
@@ -80,7 +90,7 @@ struct Home: View {
     // MARK - Products View
     var productsView: some View {
         VStack {
-            ForEach(sampleProducts, id: \.id) { item in
+            ForEach(productsList, id: \.id) { item in
                 VStack {
                     AsyncImage(url: URL(string: item.images[0])) { img in
                         img.resizable()
