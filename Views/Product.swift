@@ -34,6 +34,27 @@ struct Product: View {
                             .padding(.horizontal, 30)
                             .imageScale(.large)
                         }
+                        
+                        // Main Content
+
+                        Image(data.brand.lowercased())
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 75)
+                        Text(data.title)
+                            .font(.largeTitle.bold())
+                        
+                        Text("$\(data.price)")
+                            .font(.title.bold())
+                        
+                        VStack(alignment: .leading, content: {
+                            Text("Size")
+                                .font(.title2.bold())
+                        
+                            ScrollView {
+                                
+                            }
+                        })
                     }
                 }
                 
