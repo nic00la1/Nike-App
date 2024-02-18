@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Product: View {
     // Its our productView we show single product here
-    var data = sampleProducts[0]
+    var data: ProductsModel
     
     @State var selectedSize = 40
     
@@ -114,10 +114,6 @@ struct Product: View {
         }
         .scrollIndicators(.hidden)
     }
-}
-
-#Preview {
-    Product()
 }
 
 // For padding for safe area we need the size because different devices have different size of safe area

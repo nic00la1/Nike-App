@@ -12,6 +12,10 @@ struct Home: View {
     
     @State var productsList = sampleProducts
     
+    @State var product: ProductsModel? = nil
+    
+    @State var showProduct = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -37,6 +41,9 @@ struct Home: View {
                     
                     // Product List
                     productsView
+                        .fullScreenCover(isPresented: $showProduct, content: {
+                            Product(data: product ?? sampleProducts[0])
+                        })
                 })
                 .padding()
             }
@@ -110,6 +117,10 @@ struct Home: View {
                 .padding(.bottom)
                 .background(.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 30))
+                .onTapGesture {
+                    product = item
+                    showProduct = true
+                }
             }
         }
         .zIndex(0)
