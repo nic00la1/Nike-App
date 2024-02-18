@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductsModel: Identifiable, Hashable {
-    var id: String
+    var id: String // It's a document id so it's not needed to add it in firestore document.
     var title: String
     var brand: String
     var description: String
