@@ -10,7 +10,9 @@ import SwiftUI
 struct Home: View {
     @State var currentCategory = "All"
     
-    @State var productsList = sampleProducts
+    @State var productsList = [ProductsModel]()
+    
+    @StateObject var db = Database()
     
     @State var product: ProductsModel? = nil
     
@@ -42,10 +44,13 @@ struct Home: View {
                     // Product List
                     productsView
                         .fullScreenCover(isPresented: $showProduct, content: {
-                            Product(data: product ?? sampleProducts[0])
+                            Product(data: product ?? db.productList[0])
                         })
                 })
                 .padding()
+                .onAppear() {
+                    productsList = db.productList
+                }
             }
             .scrollIndicators(.hidden)
         }
@@ -80,9 +85,9 @@ struct Home: View {
                             // For that we use new list
                             
                             if item.title == "All" {
-                                productsList = sampleProducts
+                                productsList = db.productList
                             } else {
-                                productsList = sampleProducts.filter{ $0.brand == item.title }
+                                productsList = db.productList.filter{ $0.brand == item.title }
                             }
                         }
                        
