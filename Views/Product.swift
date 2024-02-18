@@ -13,6 +13,8 @@ struct Product: View {
     
     @State var selectedSize = 40
     
+    @Environment(\.presentationMode) var dismiss
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -27,7 +29,9 @@ struct Product: View {
                             // Navigation
                             HStack {
                                 Image(systemName: "arrow.left")
-                                
+                                    .onTapGesture {
+                                        dismiss.wrappedValue.dismiss()
+                                    }
                                 Spacer()
                                 
                                 Image(systemName: "heart")
